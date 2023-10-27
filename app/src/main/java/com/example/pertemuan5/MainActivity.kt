@@ -66,7 +66,7 @@ fun SeleckJK(
     onSelectionChanged: (String) -> Unit = {}
 ){
     var selectedValue by rememberSaveable { mutableStateOf(" ") }
-    Column (Modifier.padding(16.dp)){
+    Column (Modifier.padding(10.dp)){
         options.forEach{ item ->
             Row (
                 modifier = Modifier.selectable(
@@ -92,7 +92,7 @@ fun SeleckJK(
 }
 
 @Composable
-fun TextHasil(namanya: String, telponnya: String, alamatnya: String,jenisnya: String){
+fun TextHasil(namanya: String, telponnya: String, emailnya: String,alamatnya: String,jenisnya: String){
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -105,6 +105,10 @@ fun TextHasil(namanya: String, telponnya: String, alamatnya: String,jenisnya: St
         )
         Text(
             text = "Telepon : " + telponnya,
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+        )
+        Text(
+            text = "Email : " + emailnya,
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
         )
         Text(
@@ -123,6 +127,7 @@ fun TextHasil(namanya: String, telponnya: String, alamatnya: String,jenisnya: St
 fun TampilForm(cobaviewmodel: cobaviewmodel = viewModel()){
     var textNama by remember { mutableStateOf(" ")}
     var textTlp by remember { mutableStateOf(" ")}
+    var textEml by remember { mutableStateOf(" ")}
     var textAlmt by remember { mutableStateOf(" ")}
 
     val context = LocalContext.current
@@ -169,7 +174,7 @@ fun TampilForm(cobaviewmodel: cobaviewmodel = viewModel()){
     Button(
         modifier = Modifier.fillMaxWidth(),
         onClick = {
-            cobaviewmodel.insertData(textNama, textTlp, textAlmt, dataform.sex)
+            cobaviewmodel.insertData(textNama, textTlp, textAlmt, textEml,dataform.sex)
         }
     ) {
         Text(
@@ -178,7 +183,7 @@ fun TampilForm(cobaviewmodel: cobaviewmodel = viewModel()){
         )
     }
     Spacer(modifier = Modifier.height(100.dp))
-    TextHasil(namanya = cobaviewmodel.namaUsr, telponnya = cobaviewmodel.noTlp, cobaviewmodel.alamat, jenisnya = cobaviewmodel.jenisKL)
+    TextHasil(namanya = cobaviewmodel.namaUsr, telponnya = cobaviewmodel.noTlp, cobaviewmodel.alamat, cobaviewmodel.email,jenisnya = cobaviewmodel.jenisKL)
 }
 
 @Composable
